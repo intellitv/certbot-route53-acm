@@ -3,7 +3,8 @@
 envvars_exception(){
   echo "-------------------------------------------------------------------------------"
   echo "# The following environment vars are read"
-  echo "  - DOMAIN_NAME - my.domain.com"
+  echo "  - DOMAIN_NAME - *.domain.com"
+  echo "  - DOMAIN_OUTPUT_PATH - domain.com"
   echo "  - CONTACT_EMAIL - john@doe.com"
   echo "  - AWS_DEFAULT_REGION - us-east-1"
   echo "  - AWS_ACCESS_KEY_ID - F9Y6KUHL86BTTTEL"
@@ -17,6 +18,7 @@ envvars_exception(){
 
 mandatory_vars=(
   "DOMAIN_NAME"
+  "DOMAIN_OUTPUT_PATH"
   "CONTACT_EMAIL"
   "AWS_DEFAULT_REGION"
 )
@@ -55,16 +57,16 @@ test_certbot(){
 
 aws_create_cert(){
   aws acm import-certificate \
-    --certificate file:///etc/letsencrypt/live/$DOMAIN_NAME/cert.pem \
-    --private-key file:///etc/letsencrypt/live/$DOMAIN_NAME/privkey.pem \
-    --certificate-chain file:///etc/letsencrypt/live/$DOMAIN_NAME/chain.pem
+    --certificate file:///etc/letsencrypt/live/$DOMAIN_OUTPUT_PATH/cert.pem \
+    --private-key file:///etc/letsencrypt/live/$DOMAIN_OUTPUT_PATH/privkey.pem \
+    --certificate-chain file:///etc/letsencrypt/live/$DOMAIN_OUTPUT_PATH/chain.pem
 }
 
 aws_update_cert(){
   aws acm import-certificate \
-    --certificate file:///etc/letsencrypt/live/$DOMAIN_NAME/cert.pem \
-    --private-key file:///etc/letsencrypt/live/$DOMAIN_NAME/privkey.pem \
-    --certificate-chain file:///etc/letsencrypt/live/$DOMAIN_NAME/chain.pem \
+    --certificate file:///etc/letsencrypt/live/$DOMAIN_OUTPUT_PATH/cert.pem \
+    --private-key file:///etc/letsencrypt/live/$DOMAIN_OUTPUT_PATH/privkey.pem \
+    --certificate-chain file:///etc/letsencrypt/live/$DOMAIN_OUTPUT_PATH/chain.pem \
     --certificate-arn $CERT_ARN
 }
 
