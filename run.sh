@@ -36,7 +36,7 @@ call_certbot(){
   certbot \
     certonly \
     --agree-tos \
-    --keep-until-expiring \
+    --keep \
     --eff-email \
     --dns-route53 \
     --dns-route53-propagation-seconds 30 \
@@ -48,7 +48,7 @@ test_certbot(){
   certbot \
     certonly \
     --agree-tos \
-    --keep-until-expiring \
+    --keep \
     --eff-email \
     --dns-route53 \
     --dry-run \
