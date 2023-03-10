@@ -40,6 +40,7 @@ call_certbot(){
     --eff-email \
     --dns-route53 \
     --dns-route53-propagation-seconds 30 \
+    --key-type rsa \
     -m $CONTACT_EMAIL \
     -d $DOMAIN_NAME
 }
@@ -53,6 +54,7 @@ test_certbot(){
     --dns-route53 \
     --dry-run \
     --dns-route53-propagation-seconds 30 \
+    --key-type rsa \
     -m $CONTACT_EMAIL \
     -d $DOMAIN_NAME 
 }
